@@ -4,7 +4,7 @@
 ![Made with JavaScript](https://img.shields.io/badge/code-javascript-yellow.svg)
 ![Microservice](https://img.shields.io/badge/type-microservice-green.svg)
 
-[![Deploy to Vercel](https://vercel.com/button)](https://vercel.com/new/import?s=https://github.com/your-username/emoji-favicon)
+[![Deploy to Vercel](https://vercel.com/button)](https://vercel.com/new/import?s=https://github.com/myferr/favemoji)
 
 ## Turn any emoji into a favicon.
 Inject this code into your HTML
