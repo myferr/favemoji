@@ -1,4 +1,4 @@
-# favmoji
+# favemoji
 
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 ![Made with JavaScript](https://img.shields.io/badge/code-javascript-yellow.svg)
