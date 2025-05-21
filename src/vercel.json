@@ -1,6 +1,10 @@
 {
-  "rewrites": [
-    { "source": "/", "destination": "/index.html" },
-    { "source": "/:emoji", "destination": "/api/svg.js" }
+  "builds": [
+    { "src": "page.js", "use": "@vercel/node" },
+    { "src": "svg.js", "use": "@vercel/node" }
+  ],
+  "routes": [
+    { "src": "^/$", "dest": "/page.js" },
+    { "src": "^/(.+)$", "dest": "/svg.js" }
   ]
 }
