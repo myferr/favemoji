@@ -10,11 +10,11 @@
 Inject this code into your HTML
 
 ```html
-<link rel="icon" href="https://favmoji.vercel.app/🧑‍💻" /> 
+<link rel="icon" href="https://favemoji.vercel.app/🧑‍💻" /> 
 ```
 or this for `2-3` letters
 ```html
-<link rel="icon" href="https://favmoji.vercel.app/ff" /> 
+<link rel="icon" href="https://favemoji.vercel.app/ff" /> 
 ```
 
 ## Features
