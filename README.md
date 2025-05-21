@@ -7,14 +7,10 @@
 [![Deploy to Vercel](https://vercel.com/button)](https://vercel.com/new/import?s=https://github.com/myferr/favemoji)
 
 ## Turn any emoji into a favicon.
-Inject this code into your HTML
+Inject this code into your project
 
 ```html
 <link rel="icon" href="https://favemoji.vercel.app/🧑‍💻" /> 
-```
-or this for `2-3` letters
-```html
-<link rel="icon" href="https://favemoji.vercel.app/ff" /> 
 ```
 
 ## Features
