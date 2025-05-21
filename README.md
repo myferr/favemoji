@@ -23,5 +23,5 @@ a {
 
 - Converts emoji into SVG favicons on the fly
 - Dynamic routes like `/🚀`, `/🎧`, `/🤖` generate favicon pages
-- No build step — pure HTML + JavaScript
+- No build step — pure JavaScript
 - Ideal for quick previews, memes, and fun pages
