@@ -9,7 +9,7 @@ export default function handler(req, res) {
     }
 
     const svg = `
-      <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+      <svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 64 64">
         <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="48">
           ${emojiEncoded}
         </text>
