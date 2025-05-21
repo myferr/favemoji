@@ -1,6 +1,7 @@
 {
   "rewrites": [
     { "source": "/", "destination": "/index.html" },
-    { "source": "/(.*)", "destination": "/api/handle.js" }
+    { "source": "/(.*)", "destination": "/api/svg.js" },
+    { "source": "/preview/(.*)", "destination": "/api/emoji.js" }
   ]
 }
