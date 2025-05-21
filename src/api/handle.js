@@ -2,15 +2,27 @@ export default async function handler(req, res) {
   const { url } = req;
   const emoji = decodeURIComponent(url.slice(1));
 
-  // Basic validation — limit emoji length to avoid abuse
-  if (!emoji || emoji.length > 4) {
+  if (!emoji) {
     res.statusCode = 400;
     res.end("Invalid emoji");
     return;
   }
 
-  const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 16 16'><text x='0' y='14'>${emoji}</text></svg>`;
-  const dataUrl = `data:image/svg+xml,${encodeURIComponent(svg)}`;
+  // Use Intl.Segmenter to count grapheme clusters
+  const segmenter = new Intl.Segmenter(undefined, { granularity: "grapheme" });
+  const graphemes = [...segmenter.segment(emoji)];
+
+  if (graphemes.length > 4) {
+    res.statusCode = 400;
+    res.end("Emoji too long");
+    return;
+  }
+
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+    <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="48">${emoji}</text>
+  </svg>`;
+
+  const dataUrl = `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
 
   const html = `
     <!DOCTYPE html>
