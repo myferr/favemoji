@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <link
+      rel="shortcut icon"
+      href="https://favemoji.vercel.app/♥️"
+      type="image/x-icon"
+    />
     <meta charset="UTF-8" />
     <title>Favemoji</title>
     <style>
@@ -11,22 +16,27 @@
           "Open Sans", "Helvetica Neue", sans-serif;
         text-align: center;
         margin: 50px;
+        cursor: url("https://favemoji.vercel.app/👆") 15 0, auto;
       }
       h1 {
         font-size: 2em;
+        cursor: url("https://favemoji.vercel.app/💬") 15 0, auto;
       }
       p {
         font-size: 1em;
+        cursor: url("https://favemoji.vercel.app/💬") 15 0, auto;
       }
       code {
         font-family: "JetBrains Mono", monospace;
         background-color: #f4f4f4;
         padding: 5px 10px;
         border-radius: 5px;
+        cursor: url("https://favemoji.vercel.app/💻") 15 0, auto;
       }
       a {
         background-color: #f4f4f4;
         padding: 5px 10px;
+        cursor: url("https://favemoji.vercel.app/👌") 15 0, auto;
         border-radius: 5px;
       }
     </style>
@@ -43,26 +53,15 @@
 
     <a href="/🔔">/🔔</a>
     <a href="/💻">/💻</a>
-    <h1>Wait.. this also works with letters?!</h1>
-    <p>Yeah! It's crazy 🤪</p>
-    <p>
-      Up to <code>4 letters</code> can use used as a favicon yet up to
-      <code>2-3 letters</code> are displayed
-    </p>
-    <p>Here are some examples:</p>
-    <a href="/f">/f</a>
-    <a href="/aa">/aa</a>
 
-    <a href="/abcd">/abcd</a>
-    <a href="/abc">/abc</a>
     <h1>So, how do I use it?</h1>
-    <p>Just add this to your <code>index.html</code> file:</p>
+    <p>Just add this to your project:</p>
     <code>
       &lt;link rel="icon" href="https://favemoji.vercel.app/🧑‍💻" /&gt;
     </code>
-    <p>or</p>
+    <p>or add this to your CSS</p>
     <code>
-      &lt;link rel="icon" href="https://favemoji.vercel.app/ff" /&gt;
+      a { cursor: url("https://favemoji.vercel.app/👆") 15 0, auto; }
     </code>
     <div style="margin-top: 50px">
       <hr />
