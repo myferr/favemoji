@@ -1,25 +1,24 @@
-export default async function handler(req, res) {
-  const match = req.url.match(/\/svg\/(.+)$/);
-  const emoji = decodeURIComponent(match ? match[1] : "");
+export default function handler(req, res) {
+  try {
+    const rawEmoji = decodeURIComponent(req.url.replace('/svg/', ''));
+    const segmenter = new Intl.Segmenter(undefined, { granularity: "grapheme" });
+    const graphemes = [...segmenter.segment(rawEmoji)];
 
-  if (typeof Intl.Segmenter === "undefined") {
-    res.statusCode = 500;
-    return res.end("Intl.Segmenter not supported.");
-  }
+    if (!rawEmoji || graphemes.length > 6) {
+      res.statusCode = 400;
+      return res.end("Invalid emoji");
+    }
 
-  const segmenter = new Intl.Segmenter(undefined, { granularity: "grapheme" });
-  const graphemes = [...segmenter.segment(emoji)];
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 16 16">
+      <text x="8" y="12" font-size="12" text-anchor="middle" dominant-baseline="middle">${rawEmoji}</text>
+    </svg>`;
 
-  if (!emoji || graphemes.length > 8) {
+    res.setHeader("Content-Type", "image/svg+xml");
+    res.statusCode = 200;
+    res.end(svg);
+
+  } catch {
     res.statusCode = 400;
-    return res.end("Invalid emoji");
+    res.end("Invalid emoji");
   }
-
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
-    <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="48">${emoji}</text>
-  </svg>`;
-
-  res.setHeader("Content-Type", "image/svg+xml");
-  res.statusCode = 200;
-  res.end(svg);
 }
