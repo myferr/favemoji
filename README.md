@@ -12,6 +12,11 @@ Inject this code into your project:
 <link rel="icon" href="https://favemoji.vercel.app/🧑‍💻" /> 
 ```
 
+To change the emoji/favicon size add `?size={SIZE_HERE}`
+```html
+<link rel="icon" href="https://favemoji.vercel.app/🧑‍💻?size=256" /> 
+```
+
 You can also use this in CSS:
 ```css
 a {
@@ -25,3 +30,4 @@ a {
 - Dynamic routes like `/🚀`, `/🎧`, `/🤖` generate favicon pages
 - No build step — pure JavaScript
 - Ideal for quick previews, memes, and fun pages
+- Customizable size
