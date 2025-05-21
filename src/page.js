@@ -1,3 +1,5 @@
+export default function handler(req, res) {
+  const html = `
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -82,3 +84,7 @@
     </div>
   </body>
 </html>
+  `;
+  res.setHeader("Content-Type", "text/html; charset=utf-8");
+  res.status(200).end(html);
+}
