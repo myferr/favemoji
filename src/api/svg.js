@@ -1,24 +1,22 @@
 export default function handler(req, res) {
   try {
-    const rawEmoji = decodeURIComponent(req.url.replace('/svg/', ''));
-    const segmenter = new Intl.Segmenter(undefined, { granularity: "grapheme" });
-    const graphemes = [...segmenter.segment(rawEmoji)];
+    const urlParts = req.url.split("/");
+    const emojiEncoded = urlParts[1];
 
-    if (!rawEmoji || graphemes.length > 6) {
-      res.statusCode = 400;
-      return res.end("Invalid emoji");
+    if (!emojiEncoded) {
+      res.status(400).end("Invalid emoji: missing");
+      return;
     }
 
+    const emoji = decodeURIComponent(emojiEncoded);
+
     const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 16 16">
-      <text x="8" y="12" font-size="12" text-anchor="middle" dominant-baseline="middle">${rawEmoji}</text>
+      <text x="0" y="14" font-size="14">${emoji}</text>
     </svg>`;
 
-    res.setHeader("Content-Type", "image/svg+xml");
-    res.statusCode = 200;
-    res.end(svg);
-
-  } catch {
-    res.statusCode = 400;
-    res.end("Invalid emoji");
+    res.setHeader("Content-Type", "image/svg+xml; charset=utf-8");
+    res.status(200).end(svg);
+  } catch (e) {
+    res.status(500).end("Server error: " + e.message);
   }
 }
