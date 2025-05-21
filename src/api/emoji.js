@@ -1,47 +1,41 @@
-export default async function handler(req, res) {
-  const match = req.url.match(/^\/(.+)$/);
-  const raw = match ? match[1] : "";
-  const emoji = decodeURIComponent(raw);
+export default function handler(req, res) {
+  try {
+    const rawEmoji = decodeURIComponent(req.url.replace('/emoji/', ''));
+    const segmenter = new Intl.Segmenter(undefined, { granularity: "grapheme" });
+    const graphemes = [...segmenter.segment(rawEmoji)];
 
-  if (typeof Intl.Segmenter === "undefined") {
-    res.statusCode = 500;
-    return res.end("Intl.Segmenter not supported.");
-  }
+    if (!rawEmoji || graphemes.length > 6) {
+      res.statusCode = 400;
+      return res.end("Invalid emoji");
+    }
 
-  const segmenter = new Intl.Segmenter(undefined, { granularity: "grapheme" });
-  const graphemes = [...segmenter.segment(emoji)];
+    const faviconUrl = `/svg/${encodeURIComponent(rawEmoji)}`;
 
-  if (!emoji || graphemes.length > 8) {
+    const html = `
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8" />
+        <title>Favicon: ${rawEmoji}</title>
+        <link rel="icon" href="${faviconUrl}" type="image/svg+xml" />
+        <style>
+          body { font-family: system-ui, sans-serif; text-align: center; margin-top: 3rem; }
+          h1 { font-size: 5rem; }
+        </style>
+      </head>
+      <body>
+        <h1>${rawEmoji}</h1>
+        <p>This emoji is your favicon!</p>
+      </body>
+      </html>
+    `;
+
+    res.setHeader("Content-Type", "text/html; charset=utf-8");
+    res.statusCode = 200;
+    res.end(html);
+
+  } catch {
     res.statusCode = 400;
-    return res.end("Invalid emoji");
+    res.end("Invalid emoji");
   }
-
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
-    <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="48">${emoji}</text>
-  </svg>`;
-
-  const dataUrl = `data:image/svg+xml,${encodeURIComponent(svg)}`;
-
-  const html = `
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-      <meta charset="UTF-8" />
-      <title>Favicon: ${emoji}</title>
-      <link rel="icon" type="image/svg+xml" href="${dataUrl}" />
-      <style>
-        body { font-family: system-ui, sans-serif; text-align: center; margin-top: 3rem; }
-        h1 { font-size: 5rem; }
-      </style>
-    </head>
-    <body>
-      <h1>${emoji}</h1>
-      <p>This emoji is your favicon!</p>
-    </body>
-    </html>
-  `;
-
-  res.setHeader("Content-Type", "text/html; charset=utf-8");
-  res.statusCode = 200;
-  res.end(html);
 }
