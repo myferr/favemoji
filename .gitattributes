@@ -1,1 +1,1 @@
-*.json  linguist-language=JSON
+/src/*.json linguist-language=JSON
