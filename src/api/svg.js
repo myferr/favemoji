@@ -1,19 +1,17 @@
 export default function handler(req, res) {
   try {
-    const urlParts = req.url.split("/");
-    const emojiEncoded = urlParts[1];
+    const path = req.url.split("?")[0];
+    const emojiEncoded = decodeURIComponent(path.slice(1));
 
-    if (!emojiEncoded) {
-      res.status(400).end("Invalid emoji: missing");
+    if (!emojiEncoded || emojiEncoded.length > 16) {
+      res.status(400).end("Invalid emoji");
       return;
     }
-
-    const emoji = decodeURIComponent(emojiEncoded);
 
     const svg = `
       <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
         <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="48">
-          ${emoji}
+          ${emojiEncoded}
         </text>
       </svg>
     `;
