@@ -1,7 +1,6 @@
 {
   "rewrites": [
     { "source": "/", "destination": "/index.html" },
-    { "source": "/emoji/:emoji*", "destination": "/api/emoji.js" },
-    { "source": "/svg/:emoji*", "destination": "/api/svg.js" }
+    { "source": "/:emoji", "destination": "/api/svg.js" }
   ]
 }
