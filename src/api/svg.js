@@ -10,9 +10,13 @@ export default function handler(req, res) {
 
     const emoji = decodeURIComponent(emojiEncoded);
 
-    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 16 16">
-      <text x="0" y="14" font-size="14">${emoji}</text>
-    </svg>`;
+    const svg = `
+      <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+        <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="48">
+          ${emoji}
+        </text>
+      </svg>
+    `;
 
     res.setHeader("Content-Type", "image/svg+xml; charset=utf-8");
     res.status(200).end(svg);
